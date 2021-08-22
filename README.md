@@ -12,11 +12,11 @@ From PyPI:
 ## Basic Usage
 
 ```py
-import moonrakerpy
+import moonrakerpy as moonpy
 
 # Instantiate a `MoonrakerPrinter` object using the web/IP address of the target
 # Moonraker installation.
-printer = MoonrakerPrinter('http://192.168.1.69')
+printer = moonpy.MoonrakerPrinter('http://192.168.1.69')
 
 # Send arbitrary g-code commands
 printer.send_gcode('G28 X')
