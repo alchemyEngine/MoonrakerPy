@@ -23,13 +23,34 @@ class MoonrakerPrinter(object):
             return True
         return False
 
-    def get_gcode(self, count:int=1, msg_type:str='response'):
+    def get_gcode(self, count:int=1, simplify:bool=False, msg_type:str='response'):
+        '''
+        Query the gcode store.
+
+        Parameters
+        ----------
+        count : int, default=1
+            Numbers of cached items to retrieve from the gcode store
+        simplify : bool, default=True
+            Return only the message portion of each item, as a list
+        msg_type : str, default='response'
+            One of 'response', 'command', or 'both' to return
+
+        Returns
+        -------
+        list - cached gcode strings if simplified, dict of each item if not
+        '''
         resp = self.get('/server/gcode_store?count=%i' % count)
         store = resp['result']['gcode_store']
         responses = []
         for obj in store:
-            if obj['type'] == msg_type:
-                responses.append(obj['message'])
+            if msg_type == 'both':
+                responses.append(obj)
+            else:
+                if obj['type'] == msg_type:
+                    responses.append(obj)
+        if simplify:
+            return [obj['message'] for obj in responses]
         return responses
 
     def set_bed_temp(self, target:float=0.):
