@@ -23,7 +23,7 @@ class MoonrakerPrinter(object):
             return True
         return False
 
-    def get_gcode(self, count:int=1, simplify:bool=False, msg_type:str='response'):
+    def get_gcode(self, count:int=1, simplify:bool=True, msg_type:str='response'):
         '''
         Query the gcode store.
 
