@@ -27,7 +27,7 @@ class MoonrakerPrinter(object):
         '''
         Query the gcode store.
 
-        Parameters
+        Args
         ----------
         count : int, default=1
             Numbers of cached items to retrieve from the gcode store
@@ -52,6 +52,23 @@ class MoonrakerPrinter(object):
         if simplify:
             return [obj['message'] for obj in responses]
         return responses
+
+    def query_status(self, object:str=''):
+        '''
+        Query single printer object
+        
+        Args
+        ----
+        object : str
+            Printer status object
+        
+        Returns
+        -------
+        dict, printer object status
+        '''
+        query = '/printer/objects/query?%s' % object
+        return self.get(query)['result']['status']
+
 
     def set_bed_temp(self, target:float=0.):
         cmd = 'SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=%.1f' % target
