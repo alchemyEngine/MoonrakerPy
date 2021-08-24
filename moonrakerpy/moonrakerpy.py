@@ -55,7 +55,7 @@ class MoonrakerPrinter(object):
 
     def query_status(self, object:str=''):
         '''
-        Query single printer object
+        Query a single printer object.
         
         Args
         ----
@@ -67,8 +67,7 @@ class MoonrakerPrinter(object):
         dict, printer object status
         '''
         query = '/printer/objects/query?%s' % object
-        return self.get(query)['result']['status']
-
+        return self.get(query)['result']['status'][object]
 
     def set_bed_temp(self, target:float=0.):
         cmd = 'SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=%.1f' % target

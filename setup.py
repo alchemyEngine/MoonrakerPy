@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding="utf-8") as fh:
 
 setuptools.setup(
     name="MoonrakerPy",
-    version="0.2.0",
+    version="0.2.1",
     author="Robert Pazdzior",
     author_email="robertp@norbital.com",
     description="A Python package for interface with the Moonraker API.",
