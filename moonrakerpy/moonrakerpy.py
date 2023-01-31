@@ -69,6 +69,28 @@ class MoonrakerPrinter(object):
         query = '/printer/objects/query?%s' % object
         return self.get(query)['result']['status'][object]
 
+    def query_printer_info(self):
+        '''
+        Query standard printer info
+
+        Returns
+        -------
+        dict, printer info
+        '''
+        query = '/printer/info'
+        return self.get(query)['result']
+
+    def get_webcam_info(self):
+        '''
+        Get webcam list
+
+        Returns
+        -------
+        dict, webcam list
+        '''
+        query = '/server/webcams/list'
+        return self.get(query)['result']
+
     def set_bed_temp(self, target:float=0.):
         cmd = 'SET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=%.1f' % target
         if self.send_gcode(cmd):
